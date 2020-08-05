@@ -1,0 +1,23 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.heading{
+    text-align: center;
+    padding: 40px 10px;
+}
+.all-links a{
+    display: block;
+    align-items: center;
+    text-align: center;
+    padding: 10px 0;
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3rem;
+    background: purple;
+    margin: 20px 25%;
+    border-radius: 20px;
+}
