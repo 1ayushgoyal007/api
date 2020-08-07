@@ -23,10 +23,29 @@ app.post('/quiz', function(req,res){
 })
 
 app.get('/allQuiz', function(req,res){
-    res.send({
-        a:'temp1',
-        b:'some data'
-    })
+    res.send([
+  {
+  _id: "5f2cfd14b2c79a1a44063670",
+  name: "Ayush",
+  qualification: "adsf",
+  institute: "Uttar Pradesh Technical University",
+  __v: 0
+  },
+  {
+  _id: "5f2cfda1b2c79a1a44063671",
+  name: "Ayush",
+  qualification: "adsf",
+  institute: "Uttar Pradesh Technical University",
+  __v: 0
+  },
+  {
+  _id: "5f2cfed4d5d3712da43621e4",
+  name: "another one",
+  qualification: "adsf",
+  institute: "sdfd",
+  __v: 0
+  }
+])
 })
 
 app.get('/faceoff', function(req,res){
