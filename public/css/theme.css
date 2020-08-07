@@ -1,0 +1,10 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.each{
+    padding: 2rem;
+    border: 2px solid red;
+    margin: 10px;
+}

@@ -12,6 +12,24 @@
 <body>
     <h1 class="heading" >Create Your Professor Profile</h1>
 
-  
+    <form action="/professor" method="POST">
+        <div>
+            <input type="text" placeholder="Enter Your Name" name="name" >
+        </div>
+        <div>
+            <input type="text" placeholder="Contact Number" name="number" >
+        </div>
+        <div>
+            <input type="text" placeholder="Qualifications" name="qualification" >
+        </div>
+        <div>
+            <input type="text" placeholder="Institute Name" name="institute" >
+        </div>
+        <input type="submit" value="Submit" />
+    </form>
+
+    <div>
+        <a href="/viewProfessors">View All Professors </a>
+    </div>
 </body>
 </html>
