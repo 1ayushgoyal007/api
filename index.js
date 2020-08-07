@@ -25,22 +25,17 @@ app.post('/quiz', function(req,res){
 app.get('/allQuiz', function(req,res){
     res.send([
   {
-  _id: "5f2cfd14b2c79a1a44063670",
+  _id: "5f2d09775b88bc3038f75ba2",
   name: "Ayush",
+  number: "981991",
   qualification: "adsf",
   institute: "Uttar Pradesh Technical University",
   __v: 0
   },
   {
-  _id: "5f2cfda1b2c79a1a44063671",
-  name: "Ayush",
-  qualification: "adsf",
-  institute: "Uttar Pradesh Technical University",
-  __v: 0
-  },
-  {
-  _id: "5f2cfed4d5d3712da43621e4",
-  name: "another one",
+  _id: "5f2d09855b88bc3038f75ba3",
+  name: "Silicon Hills",
+  number: "981991",
   qualification: "adsf",
   institute: "sdfd",
   __v: 0
