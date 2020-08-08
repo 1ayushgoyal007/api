@@ -19,7 +19,7 @@ app.use(function(req, res, next) {
 
 
 
-mongoose.connect('mongodb://localhost/professor',{useNewUrlParser:true, useUnifiedTopology:true}).then(()=>{
+mongoose.connect('mongodb+srv://Company:Company@cluster0.l2p3v.mongodb.net/Cluster0?retryWrites=true&w=majority',{useNewUrlParser:true, useUnifiedTopology:true}).then(()=>{
     console.log('DB Connected');
 }).catch((err)=>{
     console.log('DB Having issues', err.message);

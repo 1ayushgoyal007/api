@@ -11,9 +11,12 @@
 </head>
 <body>
     <h1>All Professors </h1>
-    <%= data[0]._id%>
-
+   
+   
+    
+      
     <% for(var i=0; i<data.length;i++){ %>
+       
         <div class="each" >
             <h2> Name-> <%= data[i].name %></h2>
             <p>Institute -><%=  data[i].institute %></p>
@@ -23,6 +26,7 @@
                 <button class="btn btn-danger" >Delete</button>
             </form>
         </div>
+      
     <% } %>
 </body>
 </html>
