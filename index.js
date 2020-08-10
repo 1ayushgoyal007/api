@@ -154,6 +154,32 @@ app.post('/matrimony', function(req,res){
 
 })
 
+app.get('/viewMatrimony', function(req,res){
+    Matrimony.find({}, function(err, data){
+        if(err){
+            console.log('error occured', err);
+            res.send('Some Error Occured');
+        }else{
+            console.log('here is your data');
+            res.render('viewMatrimony',{data:data});
+        }
+    })
+})
+
+app.delete('/viewMatrimony/:id', function(req,res){
+    console.log('here it is',req.params.id);
+    Matrimony.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            console.log('error occured while deleting',err );
+            res.send('Error Occured, Go back and try again');
+        }else{
+            console.log('delete successful');
+            res.redirect('/viewMatrimony');
+        }
+    })
+})
+
+
 
 app.get('/allMatrimony', function(req,res){
     Matrimony.find({}, function(err,data){
@@ -165,6 +191,8 @@ app.get('/allMatrimony', function(req,res){
         }
     })
 })
+
+
 
 
 app.get('/quiz', function(req,res){

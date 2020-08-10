@@ -1,0 +1,33 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
+    crossorigin="anonymous">
+    <title>View all Matrimonies</title>
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+    <h1>View all Matrimonies</h1>
+
+    
+    <%  for(var i=0;i<data.length;i++){ %>
+        <div class="each" >
+            <h2>Name: <%= data[i].name %></h2>
+            <p>Gender: <%= data[i].gender %></p>
+            <p>Date of Birth: <%= data[i].dob %></p>
+            <p>Marital Status: <%= data[i].maritalStatus %></p>
+            <p>NAtive Place: <%= data[i].nativePlace %></p>
+            <p>height: <%= data[i].height %></p>
+            <p>education: <%= data[i].education %></p>
+            <p>jobProfile: <%= data[i].jobProfile %></p>
+            <p>dateOfBaptism: <%= data[i].dateOfBaptism %></p>
+            <form method="POST" action="/viewMatrimony/<%= data[i]._id%>?_method=DELETE" >
+                <button class="btn btn-danger" >Delete</button>
+            </form>
+        </div>
+    <% } %>
+</body>
+</html>
