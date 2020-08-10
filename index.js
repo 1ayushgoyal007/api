@@ -29,13 +29,15 @@ mongoose.connect('mongodb+srv://Company:Company@cluster0.l2p3v.mongodb.net/Clust
 
 
 var Professor = require('./models/User');
-
+var Matrimony = require('./models/Matrimony');
 
 
 app.get('/', function(req,res){
     res.render('index');
 })
 
+
+//Professor API-----------------------------------------------------
 app.get('/professor', function(req,res){
     res.render('professor');
 })
@@ -95,6 +97,75 @@ app.get('/allProfessor', function(req,res){
         }
     })
 })
+
+//Matrimony API----------------------------------------------------------
+
+app.post('/matrimony', function(req,res){
+    var name = req.body.name;
+    var gender = req.body.gender;
+    var dob = req.body.dob;
+    var maritalStatus = req.body.maritalStatus;
+    var nativePlace = req.body.nativePlace;
+    var height = req.body.height;
+    var education = req.body.education;
+    var jobProfile = req.body.jobProfile;
+    var dateOfBaptism = req.body.dateOfBaptism;
+    var Residance = req.body.Residance;
+    var contactNo = req.body.contactNo;
+    var PastorName = req.body.PastorName;
+    var PastorMobileNo  = req.body.PastorMobileNo;
+    var Father = req.body.Father;
+    var Mother = req.body.Mother;
+    var brother = req.body.brother;
+    var sister = req.body.sister;
+    var partner = req.body.partner;
+    var church = req.body.church;
+
+    var newData = {
+        name:name,
+        gender:gender,
+        dob:dob,
+        maritalStatus:maritalStatus,
+        nativePlace:nativePlace,
+        height:height,
+        education:education,
+        jobProfile:jobProfile,
+        dateOfBaptism:dateOfBaptism,
+        Residance:Residance,
+        contactNo:contactNo,
+        PastorName:PastorName,
+        PastorMobileNo:PastorMobileNo,
+        Father:Father,
+        Mother:Mother,
+        brother:brother,
+        sister:sister,
+        partner:partner,
+        church:church
+    }
+
+    Matrimony.create(newData, function(err, newlyData){
+        if(err){
+            console.log('error occured', err);
+        }else{
+            res.send('Done');
+        }
+    })
+
+
+})
+
+
+app.get('/allMatrimony', function(req,res){
+    Matrimony.find({}, function(err,data){
+        if(err){
+            console.log(err);
+            res.send(err);
+        }else{
+            res.send(data);
+        }
+    })
+})
+
 
 app.get('/quiz', function(req,res){
     res.render('quiz');
