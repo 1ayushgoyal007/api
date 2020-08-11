@@ -1,0 +1,71 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
+    crossorigin="anonymous">
+    <title>Quiz Form</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+
+    <%= data %>
+
+    <h1>Quiz Form</h1>
+
+    <form action="/quizForm" method="POST">
+    <div>
+        <span>Enter Question: </span>
+        <textarea name="question"  cols="60" rows="3"></textarea>
+    </div>
+
+    <div class="options" >
+        <div>
+            <span>option A: </span>
+            <input type="text" name="optionA">
+        </div>
+        <div>
+            <span>option B: </span>
+            <input type="text" name="optionB">
+        </div>
+        <div>
+            <span>option C: </span>
+            <input type="text" name="optionC">
+        </div>
+        <div>
+            <span>option D: </span>
+            <input type="text" name="optionD">
+        </div>
+    </div>
+    <div>
+        <p>Select Correct option</p>
+        <div>
+            <span>A:</span>
+            <input type="radio" name="answer" value="A">
+        </div>
+        <div>
+            <span>B:</span>
+            <input type="radio" name="answer" value="B">
+        </div>
+        <div>
+            <span>C:</span>
+            <input type="radio" name="answer"  value="C">
+        </div>
+        <div>
+            <span>D:</span>
+            <input type="radio" name="answer"  value="D">
+        </div>
+
+    </div>
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+
+<div style="margin-top: 20px;" >
+    <a href="/finish" class="btn btn-danger" >Stop Entering Question and Add some more details</a>
+</div>
+
+</body>
+</html>

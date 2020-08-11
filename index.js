@@ -19,18 +19,22 @@ app.use(function(req, res, next) {
 
 
 
-mongoose.connect('mongodb+srv://Company:Company@cluster0.l2p3v.mongodb.net/Cluster0?retryWrites=true&w=majority',{useNewUrlParser:true, useUnifiedTopology:true}).then(()=>{
-    console.log('DB Connected');
-}).catch((err)=>{
-    console.log('DB Having issues', err.message);
-})
+// mongoose.connect('mongodb+srv://Company:Company@cluster0.l2p3v.mongodb.net/Cluster0?retryWrites=true&w=majority',{useNewUrlParser:true, useUnifiedTopology:true}).then(()=>{
+//     console.log('DB Connected');
+// }).catch((err)=>{
+//     console.log('DB Having issues', err.message);
+// })
 
+mongoose.connect('mongodb://localhost/mainQuiz',{useNewUrlParser:true, useUnifiedTopology:true}).then(()=>{
+    console.log('Connected Local DB');
+})
 
 
 
 var Professor = require('./models/User');
 var Matrimony = require('./models/Matrimony');
-
+var Question = require('./models/Question');
+var Quiz = require('./models/Quiz');
 
 app.get('/', function(req,res){
     res.render('index');
@@ -194,10 +198,100 @@ app.get('/allMatrimony', function(req,res){
 
 
 
-
+// Main Quiz API --------------------------------------------------------
 app.get('/quiz', function(req,res){
     res.render('quiz');
 });
+
+app.post('/quiz', function(req,res){
+    console.log('check this one out', req.body);
+    res.render('quizForm',{details:{name:'ayush',age:20}})
+})
+app.get('/quizForm', function(req,res){
+    Question.find({},function(err,data){
+        if(err){
+            console.log('error',err);
+        }else{
+            res.render('quizForm',{data:data});
+
+        }
+    })
+})
+
+app.post('/quizForm', function(req,res){
+    var options = [req.body.optionA,req.body.optionB,req.body.optionC,req.body.optionD]
+    var question  = {
+        question: req.body.question,
+        options: options,
+        answer: req.body.answer
+    }
+
+    console.log(question);
+
+    Question.create(question, function(err,data){
+        if(err){
+            console.log('Error Occured');
+            res.send('Some Error Occured');
+        }else{
+            console.log('Check This One', data);
+            res.redirect('/quizForm');
+        }
+
+    })
+})
+
+app.get('/finish', function(req,res){
+    res.render('finish');
+})
+
+app.post('/finish', function(req,res){
+    console.log(req.body);
+    question = [];
+    Question.find({},async function(err, data){
+        if(err){
+            console.log(err);
+        }else{
+            console.log('No error should work');
+            question = await data;
+            question.forEach((each)=>{
+                question.push(each);
+            })
+            console.log('now check', question, typeof(question));
+            var quizData = {
+                name: req.body.name,
+                live_time: req.body.live_time,
+                title: req.body.title,
+                questions: question
+            }
+            Quiz.create(quizData, function(err, data){
+                if(err){
+                    console.log(err);
+                }else{
+                    console.log('Quiz has Been Created');
+                    Question.remove({}, function(err){
+                        if(err){
+                            console.log('Error Occured');
+                        }else{
+                            res.send('Delete done');
+                        }
+                    })
+                }
+            })
+        }
+    })
+})
+
+
+app.get('/trial', function(req,res){
+    Quiz.find({}, function(err,data){
+        if(err){
+            console.log(err);
+            res.send('Error Occured');
+        }else{
+            res.send(data);
+        }
+    })
+})
 
 app.post('/quiz', function(req,res){
     res.send('data pushed');
