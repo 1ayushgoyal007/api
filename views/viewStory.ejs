@@ -1,0 +1,28 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" 
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" 
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" 
+    crossorigin="anonymous">
+    <title>All Stories</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+    <h1>Total Active Stories : <%= data.length %></h1>
+    <% for(var i=0; i< data.length; i++){ %>
+        <div class="each" >
+            <div>
+                <span>Story:  <%= data[i].story %></span>
+            </div>
+            <form method="POST" action="/viewStory/<%= data[i]._id%>?_method=DELETE" >
+                <button class="btn btn-danger" > delete</button>
+            </form>
+        </div>
+    <% } %>
+
+    <a href="/kids" class="btn btn-primary" >Add More Stories</a>
+</body>
+</html>

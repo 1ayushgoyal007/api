@@ -19,15 +19,15 @@ app.use(function(req, res, next) {
 
 
 
-// mongoose.connect('mongodb+srv://Company:Company@cluster0.l2p3v.mongodb.net/Cluster0?retryWrites=true&w=majority',{useNewUrlParser:true, useUnifiedTopology:true}).then(()=>{
-//     console.log('DB Connected');
-// }).catch((err)=>{
-//     console.log('DB Having issues', err.message);
-// })
-
-mongoose.connect('mongodb://localhost/mainQuiz',{useNewUrlParser:true, useUnifiedTopology:true}).then(()=>{
-    console.log('Connected Local DB');
+mongoose.connect('mongodb+srv://Company:Company@cluster0.l2p3v.mongodb.net/Cluster0?retryWrites=true&w=majority',{useNewUrlParser:true, useUnifiedTopology:true}).then(()=>{
+    console.log('DB Connected');
+}).catch((err)=>{
+    console.log('DB Having issues', err.message);
 })
+
+// mongoose.connect('mongodb://localhost/mainQuiz',{useNewUrlParser:true, useUnifiedTopology:true}).then(()=>{
+//     console.log('Connected Local DB');
+// })
 
 
 
@@ -35,6 +35,8 @@ var Professor = require('./models/User');
 var Matrimony = require('./models/Matrimony');
 var Question = require('./models/Question');
 var Quiz = require('./models/Quiz');
+var Story = require('./models/Story');
+
 
 app.get('/', function(req,res){
     res.render('index');
@@ -266,13 +268,14 @@ app.post('/finish', function(req,res){
             Quiz.create(quizData, function(err, data){
                 if(err){
                     console.log(err);
+                    res.send('Error Occured, Contact Dev Team');
                 }else{
                     console.log('Quiz has Been Created');
                     Question.remove({}, function(err){
                         if(err){
                             console.log('Error Occured');
                         }else{
-                            res.send('Delete done');
+                            res.send('Quiz Build Complete.');
                         }
                     })
                 }
@@ -282,7 +285,7 @@ app.post('/finish', function(req,res){
 })
 
 
-app.get('/trial', function(req,res){
+app.get('/allQuiz', function(req,res){
     Quiz.find({}, function(err,data){
         if(err){
             console.log(err);
@@ -291,10 +294,49 @@ app.get('/trial', function(req,res){
             res.send(data);
         }
     })
+});
+
+//Kids -------------------------------------------------------------------------
+
+app.get('/kids', function(req,res){
+    res.render('kids');
 })
 
-app.post('/quiz', function(req,res){
-    res.send('data pushed');
+app.post('/kids', function(req,res){
+    story = {
+        story: req.body.story
+        }
+    Story.create(story, function(err, data){
+        if(err){
+            console.log('error Occured', err);
+            res.send('Error Occured');
+        }else{
+            res.redirect('/viewStory');
+        }
+    })
+})
+
+app.get('/viewStory', function(req,res){
+    Story.find({}, function(err, data){
+        if(err){
+            console.log('error occured', err);
+            res.send("Error Occured while fetching Stories");
+        }else{
+            res.render('viewStory', {data:data});
+        }
+    })
+})
+
+app.delete('/viewStory/:id', function(req,res){
+    console.log('check this id', req.params.id);
+    Story.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            console.log('Error while deleting', err);
+            res.send('Error Occured');
+        }else{
+            res.redirect('/viewStory');
+        }
+    })
 })
 
 app.get('/faceoff', function(req,res){
