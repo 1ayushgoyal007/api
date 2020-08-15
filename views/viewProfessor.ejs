@@ -20,6 +20,7 @@
         <div class="each" >
             <h2> Name-> <%= data[i].name %></h2>
             <p>Institute -><%=  data[i].institute %></p>
+            <p>Gender -><%=  data[i].gender %></p>
             <p>Contact Number -> <%=  data[i].number %></p>
             <p>Qualifications -> <%=  data[i].qualification %></p>
             <form method="POST" action="/viewProfessors/<%= data[i]._id%>?_method=DELETE" >

@@ -35,6 +35,7 @@ var Professor = require('./models/User');
 var Matrimony = require('./models/Matrimony');
 var Question = require('./models/Question');
 var Quiz = require('./models/Quiz');
+var FQuiz = require('./models/FQuiz');
 var Story = require('./models/Story');
 
 
@@ -63,19 +64,20 @@ app.post('/professor', function(req,res){
     var number = req.body.number;
     var qualification = req.body.qualification;
     var institute = req.body.institute;
-
+    var gender= req.body.gender;
     var newProfessor = {
         name:name,
         number:number,
         qualification:qualification,
-        institute:institute
+        institute:institute,
+        gender:gender
     }
     Professor.create(newProfessor, function(err, newlyData){
         if(err){
             console.log('error',err);
         }else{
             console.log('Data Pushed', newlyData);
-            res.redirect('/professor')
+            res.redirect('/viewProfessors');
         }
     })
 })
@@ -200,15 +202,11 @@ app.get('/allMatrimony', function(req,res){
 
 
 
-// Main Quiz API --------------------------------------------------------
+// Main Quiz API ---------------------------------------------------------------------
 app.get('/quiz', function(req,res){
     res.render('quiz');
 });
 
-app.post('/quiz', function(req,res){
-    console.log('check this one out', req.body);
-    res.render('quizForm',{details:{name:'ayush',age:20}})
-})
 app.get('/quizForm', function(req,res){
     Question.find({},function(err,data){
         if(err){
@@ -248,7 +246,7 @@ app.get('/finish', function(req,res){
 
 app.post('/finish', function(req,res){
     console.log(req.body);
-    question = [];
+    questions = [];
     Question.find({},async function(err, data){
         if(err){
             console.log(err);
@@ -256,14 +254,14 @@ app.post('/finish', function(req,res){
             console.log('No error should work');
             question = await data;
             question.forEach((each)=>{
-                question.push(each);
+                questions.push(each);
             })
-            console.log('now check', question, typeof(question));
+            console.log('now check', questions, typeof(questions), questions.length);
             var quizData = {
                 name: req.body.name,
                 live_time: req.body.live_time,
                 title: req.body.title,
-                questions: question
+                questions: questions
             }
             Quiz.create(quizData, function(err, data){
                 if(err){
@@ -275,7 +273,7 @@ app.post('/finish', function(req,res){
                         if(err){
                             console.log('Error Occured');
                         }else{
-                            res.send('Quiz Build Complete.');
+                            res.redirect('viewQuiz');
                         }
                     })
                 }
@@ -295,6 +293,29 @@ app.get('/allQuiz', function(req,res){
         }
     })
 });
+
+app.get('/viewQuiz',function(req,res){
+    Quiz.find({},function(err,data){
+        if(err){
+            console.log(err);
+            res.send(err);
+        }else{
+            res.render('viewQuiz',{data:data});
+        }
+    })
+})
+
+app.delete('/viewQuiz/:id', function(req,res){
+    console.log('check this param', req.params.id);
+    Quiz.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.send(err);
+        }else{
+            console.log('Quiz delete Done');
+            res.redirect('/viewQuiz');
+        }
+    })
+})
 
 //Kids -------------------------------------------------------------------------
 
@@ -339,13 +360,129 @@ app.delete('/viewStory/:id', function(req,res){
     })
 })
 
+
+app.get('/allStory', function(req,res){
+    Story.find({},function(err, data){
+        if(err){
+            console.log("Error", err);
+            res.send(err);
+        }else{
+            res.send(data);
+        }
+    })
+})
+
+
+//FaceOff API-----------------------------------------------------------------------------
 app.get('/faceoff', function(req,res){
     res.render('faceoff');
 })
 
-app.get('/stories', function(req,res){
-    res.render('stories');
+app.get('/faceofForm', function(req,res){
+
+    Question.find({},function(err,data){
+        if(err){
+            res.send(err);
+        }else{
+            res.render('faceofForm',{data:data});
+        }
+    })
 })
+
+app.post('/faceofForm', function(req,res){
+    console.log(req.body);
+    var options = [req.body.optionA,req.body.optionB,req.body.optionC,req.body.optionD];
+    var question  = {
+        question: req.body.question,
+        options: options,
+        answer: req.body.answer
+    }
+    Question.create(question, function(err,data){
+        if(err){
+            res.send(err);
+        }else{
+            console.log("Question Post Done",data);
+            res.redirect('/faceofForm');
+        }
+    })
+})
+
+app.get('/end', function(req,res){
+    res.render('end');
+})
+
+app.post('/end', function(req,res){
+    console.log(req.body);
+    var questions = [];
+    Question.find({},async function(err,data){
+        if(err){
+            res.send(err);
+        }else{
+            var response = await data;
+            response.forEach((each)=>{
+                questions.push(each);
+            });
+            var quizData  = {
+                name: req.body.name,
+                live_time:req.body.live_time,
+                questions: questions,
+                title: req.body.title,
+                email1: req.body.email1,
+                email2: req.body.email2
+            }
+            FQuiz.create(quizData, function(err, data){
+                if(err){
+                    res.send(err);
+                }else{
+                    console.log('Face Off Quiz Created');
+                    Question.remove({}, function(err){
+                        if(err){
+                            res.send(err);
+                        }else{
+                            res.redirect('/viewFQuiz');
+                        }
+                    })
+                }
+            })
+        }
+    })
+})
+
+
+app.get('/allFQuiz',function(req,res){
+    FQuiz.find({}, function(err,data){
+        if(err){
+            console.log("Error Occured",err);
+            res.send(err);
+        }else{
+            res.send(data);
+        }
+    })
+})
+
+
+app.get('/viewFQuiz', function(req,res){
+    FQuiz.find({}, function(err,data){
+        if(err){
+            res.send(err);
+        }else{
+            res.render('viewFQuiz', {data:data});
+        }
+    })
+});
+
+
+app.delete('/viewFQuiz/:id',function(req,res){
+    FQuiz.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            res.send(err);
+        }else{
+            console.log('Remove Done');
+            res.redirect('/viewFQuiz');
+        }
+    })
+} )
+
 
 app.get('*', function(req,res){
     res.render('default');
