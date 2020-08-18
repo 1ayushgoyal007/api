@@ -2,7 +2,24 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+   
+    position: relative;
+   
 }
+*::after {
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-attachment: fixed;
+    content: "";
+    background-image: url('https://www.ispringsolutions.com/blog/wp-content/uploads/2020/02/top-5.png');
+    opacity: 0.2;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: absolute;
+    z-index: -1;   
+  }
 .each{
     padding: 2rem;
     border: 2px solid red;

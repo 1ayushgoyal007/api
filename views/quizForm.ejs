@@ -10,38 +10,38 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/theme.css">
 </head>
-<body>
+<body style="margin-left: 1rem;">
 
     <%= data %>
 
-    <h1>Quiz Form</h1>
+    <h1 style="text-align: center;">Quiz Form</h1>
 
     <form action="/quizForm" method="POST">
-    <div>
-        <span>Enter Question: </span>
-        <textarea name="question"  cols="60" rows="3"></textarea>
+    <div style="display: flex; flex-direction: column;">
+        <span style="font-size: 2rem; color: darkblue;">Enter Question: </span>
+        <textarea style="width: 50%;" name="question"  cols="60" rows="3"></textarea>
     </div>
 
     <div class="options" >
         <div>
-            <span>option A: </span>
-            <input type="text" name="optionA">
+            <span>Option A: </span>
+            <input  style="margin: 1rem;" type="text" name="optionA">
         </div>
         <div>
-            <span>option B: </span>
-            <input type="text" name="optionB">
+            <span>Option B: </span>
+            <input style="margin: 1rem "type="text" name="optionB">
         </div>
         <div>
-            <span>option C: </span>
-            <input type="text" name="optionC">
+            <span>Option C: </span>
+            <input style="margin: 1rem " type="text" name="optionC">
         </div>
         <div>
-            <span>option D: </span>
-            <input type="text" name="optionD">
+            <span>Option D: </span>
+            <input style="margin: 1rem " type="text" name="optionD">
         </div>
     </div>
     <div>
-        <p>Select Correct option</p>
+        <p style="margin-top: 2rem;">Select Correct option</p>
         <div>
             <span>A:</span>
             <input type="radio" name="answer" value="A">
@@ -60,11 +60,11 @@
         </div>
 
     </div>
-    <input type="submit" value="Submit" class="btn btn-primary">
+    <input  style="margin-left: 1rem; width: 50% ; margin-top: 1rem;" type="submit" value="Submit" class="btn btn-primary">
 </form>
 
 <div style="margin-top: 20px;" >
-    <a href="/finish" class="btn btn-danger" >Stop Entering Question and Add some more details</a>
+    <a href="/finish"   style="margin-left: 1rem; width: 50% ; margin-bottom: 2rem ;" class="btn btn-danger" >Stop Entering Question and Add some more details</a>
 </div>
 
 </body>

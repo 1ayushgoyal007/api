@@ -5,7 +5,8 @@ var quizSchema = mongoose.Schema({
     name: String,
     live_time: String,
     questions: Array,
-    title: String
+    title: String,
+    date: String
 });
 
 module.exports = mongoose.model('Quiz',quizSchema);

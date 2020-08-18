@@ -10,35 +10,35 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/theme.css">
 </head>
-<body>
+<body style="margin-left: 1rem;">
     <%=  data %>
-    <h1>Faceoff Form</h1>
+    <h1 style="text-align: center;">Faceoff Form</h1>
 
     <form action="/faceofForm" method="POST">
-        <div>
-            <span>Enter Question: </span>
-            <textarea name="question"  cols="60" rows="3"></textarea>
+        <div style="display: flex; flex-direction: column;">
+            <span style="font-size: 1.5rem; color: darkblue;">Enter Question: </span>
+            <textarea style="width: 50%;" name="question"  cols="60" rows="3"></textarea>
         </div>
         <div class="options" >
             <div>
-                <span>option A: </span>
+                <span style="font-size: 1.5rem; color: darkblue;">option A: </span>
                 <input type="text" name="optionA">
             </div>
             <div>
-                <span>option B: </span>
+                <span style="font-size: 1.5rem; color: darkblue;">option B: </span>
                 <input type="text" name="optionB">
             </div>
             <div>
-                <span>option C: </span>
+                <span style="font-size: 1.5rem; color: darkblue;">option C: </span>
                 <input type="text" name="optionC">
             </div>
             <div>
-                <span>option D: </span>
+                <span style="font-size: 1.5rem; color: darkblue;">option D: </span>
                 <input type="text" name="optionD">
             </div>
         </div>
         <div>
-            <p>Select Correct option</p>
+            <p  style="font-size: 1.5rem; color: darkblue; margin-top: 1.5rem;">Select Correct option</p>
             <div>
                 <span>A:</span>
                 <input type="radio" name="answer" value="A">
@@ -57,7 +57,7 @@
             </div>
     
         </div>
-        <input type="submit" value="Submit" class="btn btn-primary">
+        <input  style="width: 30%; margin-top: 1rem;" type="submit" value="Submit" class="btn btn-primary">
     </form>
 
     <div style="margin-top: 20px;" >

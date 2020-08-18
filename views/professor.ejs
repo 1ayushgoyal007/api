@@ -9,15 +9,16 @@
     <title>Home Pge</title>
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body>
+<body style="margin-left: 1rem;" >
     <h1 class="heading" >Create Your Professor Profile</h1>
 
     <form action="/professor" method="POST">
         <div>
+            <p style="font-size: 1.5rem;">Name</p>
             <input type="text" placeholder="Enter Your Name" name="name" >
         </div>
         <div>
-            <p>Select Gender</p>
+            <p style="margin-top: 1rem;font-size: 1.5rem;">Select Gender</p>
             <div>
                 <span>Male:</span>
                 <input type="radio" name="gender" value="male">
@@ -31,16 +32,16 @@
                 <input type="radio" name="gender"  value="other">
             </div>
         </div>
-        <div>
+        <div style="margin:1rem; margin-left:0rem">
             <input type="text" placeholder="Contact Number" name="number" >
         </div>
-        <div>
+        <div style="margin:1rem; margin-left:0rem">
             <input type="text" placeholder="Qualifications" name="qualification" >
         </div>
-        <div>
+        <div style="margin:1rem; margin-left:0rem">
             <input type="text" placeholder="Institute Name" name="institute" >
         </div>
-        <input type="submit" value="Submit" />
+        <input style="background-color: darkblue; color: white; font-size: 1rem; height: 3rem;  width: 5rem; border-radius:2rem;" type="submit" value="Submit" />
     </form>
 
     <div>

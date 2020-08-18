@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/theme.css">
 </head>
 <body>
-    <h1>Total Active Stories : <%= data.length %></h1>
+    <h1 style="text-align: center;">Total Active Stories : <%= data.length %></h1>
     <% for(var i=0; i< data.length; i++){ %>
         <div class="each" >
             <div>
@@ -23,6 +23,6 @@
         </div>
     <% } %>
 
-    <a href="/kids" class="btn btn-primary" >Add More Stories</a>
+    <a href="/kids" class="btn btn-primary" style="width: 97%; margin: 1rem; height: 3rem; font-weight: bold; font-size: 1.5rem;">Add More Stories</a>
 </body>
 </html>

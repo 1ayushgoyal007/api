@@ -5,6 +5,7 @@ var schema = mongoose.Schema({
     live_time: String,
     questions: Array,
     title: String,
+    date: String,
     email1: String,
     email2: String
 })

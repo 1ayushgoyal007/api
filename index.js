@@ -261,6 +261,7 @@ app.post('/finish', function(req,res){
                 name: req.body.name,
                 live_time: req.body.live_time,
                 title: req.body.title,
+                date: req.body.date,
                 questions: questions
             }
             Quiz.create(quizData, function(err, data){
@@ -428,7 +429,8 @@ app.post('/end', function(req,res){
                 questions: questions,
                 title: req.body.title,
                 email1: req.body.email1,
-                email2: req.body.email2
+                email2: req.body.email2,
+                date: req.body.date
             }
             FQuiz.create(quizData, function(err, data){
                 if(err){
